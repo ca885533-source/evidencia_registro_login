@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 
+/**
+ * Bloque para mostrar todos los posts
+ */
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find(); // trae todos los documentos
+        res.json(posts);
+    } catch (error) {
+        res.json({ message: error });
+    }
+});
+
 router.post('/', async (req, res) => {
     // console.log(req.body); Se utiliza para la respuesta del post en consola
     const post = new Post({
